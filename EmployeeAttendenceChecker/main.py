@@ -4,7 +4,6 @@ employee = Employee.Employee()
 
 
 user_active = True
-# employee.mark_attendance()
 
 
 
