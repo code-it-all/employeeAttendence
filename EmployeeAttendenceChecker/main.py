@@ -4,6 +4,7 @@ employee = Employee.Employee()
 
 
 user_active = True
+# employee.mark_attendance()
 
 
 
@@ -20,11 +21,10 @@ while user_active:
 
 
     if user_choice == 1:
-        employee_id = int(input("Enter employee id: "))
+
         employee_name = input("Enter employee name: ")
         employee_age = int(input("Enter employee age: "))
-        employee_salary = int(input("Enter employee salary: "))
-        employee.create_employee(employee_id, employee_name, employee_age, employee_salary)
+        employee.create_employee(employee_name, employee_age)
 
 
     elif user_choice == 2:
@@ -32,10 +32,8 @@ while user_active:
 
 
     elif user_choice == 3:
-        emp_name = input("Enter employee name who is present: ")
-        date_of_attendance = input("Enter date of attendance: ")
-        status_of_present = input("Enter status of present use 'p' for present and 'a' for absent:")
-        employee.mark_attendance(employee.get_employee_id(emp_name), date_of_attendance, status_of_present)
+        emp_id = input("Enter employee id who is present: ")
+        employee.mark_attendance(emp_id)
 
     elif user_choice == 4:
         emp_name = input("Enter employee name who's attendance needs to be checked: ")
