@@ -5,8 +5,6 @@ employee = Employee.Employee()
 
 user_active = True
 
-
-
 while user_active:
     print("Please selected the operation you want to perform: ")
     print("1. Create an Employee")
@@ -14,35 +12,40 @@ while user_active:
     print("3. Mark Attendance")
     print("4. View Attendance")
     print("5. Delete Employee")
-    print("6. Exit")
-    user_choice = int(input("Enter your choice: "))
+    print("6. Attendance Report")
+    print("7. Exit")
 
 
+    user_choice = input("Enter your choice: ")
 
-    if user_choice == 1:
+    if user_choice == "1":
 
         employee_name = input("Enter employee name: ")
         employee_age = int(input("Enter employee age: "))
         employee.create_employee(employee_name, employee_age)
 
 
-    elif user_choice == 2:
+    elif user_choice == "2":
         employee.display_employee_all()
 
 
-    elif user_choice == 3:
-        emp_id = input("Enter employee id who is present: ")
+    elif user_choice == "3":
+        emp_id = int(input("Enter employee id who is present: "))
+        print("inside main from where function is called")
         employee.mark_attendance(emp_id)
 
-    elif user_choice == 4:
+    elif user_choice == "4":
         emp_name = input("Enter employee name who's attendance needs to be checked: ")
         employee.view_attendance(employee.get_employee_id(emp_name))
 
-    elif user_choice == 5:
+    elif user_choice == "5":
         emp_name = input("Enter employee name who is to be deleted: ")
         employee.delete_employee(employee.get_employee_id(emp_name))
 
-    elif user_choice == 6:
+    elif user_choice == "6":
+        employee.report()
+
+    elif user_choice == "7":
         user_active = False
         break
 

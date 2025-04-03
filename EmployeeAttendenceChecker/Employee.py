@@ -1,9 +1,12 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 class Employee:
     """Manages the employee attendance records"""
 
-    employee_list = []
+    employee_list = [{'Emp_id': 1, 'name': 'John', 'age': 30, 'attendance': []},
+                     {'Emp_id': 2, 'name': 'Jane', 'age': 25, 'attendance': []},
+                     {'Emp_id': 3, 'name': 'Jack', 'age': 35, 'attendance': []},]
+
 
     count = 1000
 
@@ -21,31 +24,30 @@ class Employee:
 
     def display_employee_all(self):
         for employee in self.employee_list:
-            print(f"emp_id: {employee['Emp_id']}, name: {employee['name']}, age: {employee['age']}")
+            print(employee)
+            # print(f"emp_id: {employee['Emp_id']}, name: {employee['name']}, age: {employee['age']}")
 
     def mark_attendance(self, emp_id):
-        print(self.employee_list)
+        # print(self.employee_list)
+        # print("inside mark_attendance function")
         for employee in self.employee_list:
+            # print(employee)
             if employee['Emp_id'] == emp_id:
-                emp_attendance = []
-
+                if 'attendance' not in employee:
+                    employee['attendance'] = []
+                emp_attendance = employee['attendance']
                 last_seven_date = date.today() - timedelta(days=7)
                 for i in range(7):
                     current_date = last_seven_date + timedelta(days=i)
-                    while True:
-                        attendance = input(f"Enter the attendance for {current_date}: , 'p' for present and 'a' for absent:").strip().lower()
-                        if attendance in ['p', 'a']:
-                            break
-                        else:
-                            print("Invalid input, please enter 'p' for present and 'a' for absent")
-
-
-                if 'attendance' in employee:
-                    employee['attendance'].append(emp_attendance)
-                else:
-                    employee['attendance'] = emp_attendance
-
+                    attendance = input(f"Enter the attendance for {current_date}: , 'p' for present and 'a' for absent:").strip().lower()
+                    employee_attendance = {
+                        'date': current_date,
+                        'attendance': attendance
+                    }
+                    emp_attendance.append(employee_attendance)
+                print(emp_attendance)
                 print("Attendance marked successfully")
+
 
     def view_attendance(self, emp_id):
         for employee in self.employee_list:
@@ -58,7 +60,16 @@ class Employee:
                 return employee['Emp_id']
 
     def delete_employee(self, emp_id):
-        self.employee_list.remove(emp_id)
-        print("Employee deleted successfully")
+        records = [record for record in self.employee_list if record["Emp_id"] != emp_id]
+        self.employee_list = records
+
+    def report(self):
+        for employee in self.employee_list:
+            print(f"Employee ID: {employee['Emp_id']}, Name: {employee['name']}, Age: {employee['age']}")
+            print("Attendance Report:")
+            for i in employee['attendance']:
+                print(f"Attendance: {i}")
+            print("----------------------------------------")
+
 
 
